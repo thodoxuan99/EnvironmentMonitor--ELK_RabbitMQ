@@ -68,7 +68,7 @@ services:
     image: docker.elastic.co/logstash/logstash-oss:7.8.0
     volumes:
       - ./product.logstash.conf:/config/product.logstash.conf      
-    command: logstash -f /config/product.logstash.conf  
+    command: logstash -f /config/product.logstash.conf 
     depends_on:
       - rabbitmq
       - elasticsearch
