@@ -9,13 +9,13 @@ services:
       - mq_data:/var/lib/rabbitmq/mnesia
     ports:
       - "15672:15672"
-      - "5672:5672" 
+      - "5672:5672"
+      - "1883:1883" 
     networks:
       - log
     environment:
       RABBITMQ_DEFAULT_USER: logUser
       RABBITMQ_DEFAULT_PASS: logPwd
-      RABBITMQ_DEFAULT_VHOST: EnterpriseLog
   ##########################################################
   elasticsearch:
     container_name: ElasticSearch    
@@ -76,10 +76,12 @@ services:
       - log    
   ##########################################################
   metricbeat:
+    
     container_name: metricbeat
     build: 
-      context: ./metricbeat
+        context: ./metricbeat
     user: root
+    command: --strict.perms=false
     volumes:      
       - /var/run/docker.sock:/var/run/docker.sock
     depends_on:
