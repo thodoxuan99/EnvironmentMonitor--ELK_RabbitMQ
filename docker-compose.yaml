@@ -1,0 +1,29 @@
+version: '3'
+services:
+
+ ##########################################################
+  rabbitmq:
+    container_name: RabbitMQ
+    image: rabbitmq:3-management-alpine
+    volumes:
+      - mq_data:/var/lib/rabbitmq/mnesia
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+      - "5671:5671"
+      - "1883:1883"
+      - "8883:8883" 
+    networks:
+      - log
+    environment:
+      RABBITMQ_DEFAULT_USER: logUser
+      RABBITMQ_DEFAULT_PASS: logPwd
+    restart: always
+  ##########################################################
+volumes:
+  mq_data:
+  elasticsearch_data:
+
+networks:
+  log:
+    driver: bridge
