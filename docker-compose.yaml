@@ -6,7 +6,7 @@ services:
     container_name: RabbitMQ
     image: rabbitmq:3-management-alpine
     volumes:
-      - mq_data:/var/lib/rabbitmq/mnesia
+      - ./ssl:/ssl
     ports:
       - "15672:15672"
       - "5672:5672"
@@ -18,11 +18,11 @@ services:
     environment:
       RABBITMQ_DEFAULT_USER: logUser
       RABBITMQ_DEFAULT_PASS: logPwd
+      RABBITMQ_CONFIG_FILE: /ssl/rabbitmq.conf
     restart: always
   ##########################################################
 volumes:
-  mq_data:
-  elasticsearch_data:
+  ssl:
 
 networks:
   log:
